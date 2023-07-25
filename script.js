@@ -1,16 +1,27 @@
 let weather = {
+
+  displayError: function (message) {
+    document.querySelector(".err").innerHTML = message;
+  },
+
+
+
   apikey: "a1e8b8baab95a695996d51f34b8ada35",
   fetchWeather: function (city) {
-        fetch(
-            "https://api.openweathermap.org/data/2.5/weather?q=" +
-              city +
-              "&units=metric&appid=" +
-              this.apikey
-          )
-            .then((response) => response.json())
-            .then((data) => this.diplayWeather(data));
-  
-    
+    fetch(
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+        city +
+        "&units=metric&appid=" +
+        this.apikey
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Oops!City not found........!");
+        }
+        return response.json();
+      })
+      .then((data) => this.diplayWeather(data))
+      .catch((error) => this.displayError(error.message));
   },
   diplayWeather: function (data) {
     const { name } = data;
@@ -37,17 +48,15 @@ let weather = {
   },
 };
 document.querySelector(".js-input").addEventListener("keyup", function (event) {
+  if (event.key == "Enter") {
+    weather.search();
+  }
+
   
-    if (event.key == "Enter") {
-      weather.search();
-    }
-   
 });
 
 document.querySelector(".search").addEventListener("click", function () {
- 
-    weather.search();
-  
+  weather.search();
 });
 let docTitile = document.title;
 
