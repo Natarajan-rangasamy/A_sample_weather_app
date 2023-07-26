@@ -16,7 +16,7 @@ let weather = {
     )
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Oops!City not found........!");
+          throw new Error("Oops!City not found.........!");
         }
         return response.json();
       })
