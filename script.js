@@ -1,10 +1,7 @@
 let weather = {
-
   displayError: function (message) {
     document.querySelector(".err").innerHTML = message;
   },
-
-
 
   apikey: "a1e8b8baab95a695996d51f34b8ada35",
   fetchWeather: function (city) {
@@ -50,13 +47,13 @@ let weather = {
 document.querySelector(".js-input").addEventListener("keyup", function (event) {
   if (event.key == "Enter") {
     weather.search();
+    document.querySelector(".js-input").value = "";
   }
-
-  
 });
 
 document.querySelector(".search").addEventListener("click", function () {
   weather.search();
+  document.querySelector(".js-input").value = "";
 });
 let docTitile = document.title;
 
