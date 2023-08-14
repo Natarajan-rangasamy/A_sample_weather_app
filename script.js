@@ -1,6 +1,6 @@
 let weather = {
   displayError: function (message) {
-    document.querySelector(".err").innerHTML = message;
+    document.querySelector(".error").innerHTML = message;
   },
 
   apikey: "a1e8b8baab95a695996d51f34b8ada35",
@@ -15,7 +15,11 @@ let weather = {
         if (!response.ok) {
           throw new Error("Oops!City not found.........!");
         }
-        return response.json();
+        else if(response.ok){
+          document.querySelector(".error").innerHTML = "";
+          return response.json();
+        }
+        
       })
       .then((data) => this.diplayWeather(data))
       .catch((error) => this.displayError(error.message));
@@ -38,6 +42,8 @@ let weather = {
       "Wind speed: " + speed + " Km/Hr";
     document.body.style.backgroundImage =
       "url('https://source.unsplash.com/1600x900/?" + name + "')";
+      document.body.style.backgroundImage =
+      "url('https://source.unsplash.com/1600x900/?nature')";
     document.querySelector(".weather").classList.remove("loading");
   },
   search: function () {
